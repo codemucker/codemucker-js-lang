@@ -33,7 +33,9 @@
     "test": "npm run build && jest --verbose=true --detectOpenHandles --coverageDirectory build/jest-coverage",
     "test-watch": "watch 'npm run test' ./src/ ./test/"
   },
-  "dependencies": {},
+  "dependencies": {
+    "shared-git-hooks": "^1.2.1"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.15",
     "jest": "^26.6.1",
