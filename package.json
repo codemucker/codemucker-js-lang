@@ -1,6 +1,6 @@
 {
   "name": "@codemucker/lang",
-  "description": "Some useful extensions to javascript/typescript",
+  "description": "Some useful common extensions to javascript/typescript",
   "license": "MIT",
   "version": "0.1.0",
   "authors": [
