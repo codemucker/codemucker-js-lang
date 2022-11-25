@@ -22,7 +22,7 @@
     "prepublishOnly": "pnpm test && pnpm run lint",
     "preversion": "pnpm run lint",
     "postversion": "git push && git push --tags",
-    "release": "publish --access private",
+    "release": "pnpm publish --access private",
     "pre-commit": "pnpm run format && pnpm run lint && pnpm run test",
     "version": "pnpm run format && git add -A src",
     "format": "prettier --write .",
