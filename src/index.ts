@@ -29,7 +29,7 @@ export const isInBrowser = _isInBrowser()
 export const isInNode = !isInBrowser
 
 export const isBlank = function (value?: string) {
-  return value == null || value == undefined || value.trim().length == 0
+  return isNullOrUndefined(value) || value.trim().length == 0
 }
 
 let idCounter = 1
@@ -49,7 +49,7 @@ export function delayMs(ms: number) {
 }
 
 export function isFunction(obj: any): obj is Function {
-  if (!obj) {
+  if (isNullOrUndefined(obj)) {
     return false
   }
   const s = Object.prototype.toString.call(obj)
@@ -57,23 +57,31 @@ export function isFunction(obj: any): obj is Function {
 }
 
 export function isString(obj: any): obj is string {
-  return obj && typeof obj === 'string'
+  return !isNullOrUndefined(obj) && typeof obj === 'string'
 }
 
 export function isStringArray(obj: any): obj is string[] {
-  return obj && Array.isArray(obj) && obj.every((it) => typeof it === 'string')
+  return (
+    !isNullOrUndefined(obj) &&
+    Array.isArray(obj) &&
+    obj.every((it) => typeof it === 'string')
+  )
 }
 
 export function isArrayOf<T>(obj: any, typeOf: Function): obj is T[] {
-  return obj && Array.isArray(obj) && obj.every((it) => it instanceof typeOf)
+  return (
+    !isNullOrUndefined(obj) &&
+    Array.isArray(obj) &&
+    obj.every((it) => it instanceof typeOf)
+  )
 }
 
 export function isArray<T>(obj: any): obj is T[] {
-  return obj && Array.isArray(obj)
+  return !isNullOrUndefined(obj) && Array.isArray(obj)
 }
 
 export function isNumber(obj: any): obj is Number {
-  return obj && typeof obj === 'number'
+  return !isNullOrUndefined(obj) && typeof obj === 'number'
 }
 
 /**
@@ -81,3 +89,7 @@ export function isNumber(obj: any): obj is Number {
  */
 export type AtLeastOneOf<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U]
+
+function isNullOrUndefined(value: unknown): value is undefined | null {
+  return value === undefined || value === null
+}
