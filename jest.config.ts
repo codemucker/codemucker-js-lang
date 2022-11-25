@@ -1,22 +1,20 @@
-import type {Config} from 'jest';
+import type { JestConfigWithTsJest } from 'ts-jest'
 
-const config: Config = {
-  verbose: true,
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  },
-  testRegex: '(/__test__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-  testPathIgnorePatterns: ['/build/', '/node_modules/'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+const config: JestConfigWithTsJest = {
   collectCoverage: false,
-  testEnvironment: 'node',
-  moduleDirectories: ['node_modules', 'src'],
+  transform: {
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        // ts-jest configuration goes here
+      },
+    ],
+  },
   roots: ['test', 'src'],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '@test/(.*)': '<rootDir>/test/$1',
   },
-  testTimeout: 30000
-};
+}
 
-export default config;
+export default config
